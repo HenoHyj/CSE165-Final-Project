@@ -6,15 +6,23 @@ using System;
 
 public class ScanAction : MonoBehaviour
 {
-    [SerializeField] GameObject popUpUI;
+    [SerializeField] GameObject woundUI;
+    [SerializeField] GameObject temperatureUI;
     // Start is called before the first frame update
     public void popUpCanvas(string[] values)
     {
-        popUpUI.SetActive(true);
+        Invoke("ShowPopUp", 3.0f);
+    }
+
+    private void ShowPopUp()
+    {
+        temperatureUI.SetActive(true);
+        woundUI.SetActive(true);
     }
 
     public void closeCanvas(string[] values)
     {
-        popUpUI.SetActive(false);
+        temperatureUI.SetActive(false);
+        woundUI.SetActive(false);
     }
 }
