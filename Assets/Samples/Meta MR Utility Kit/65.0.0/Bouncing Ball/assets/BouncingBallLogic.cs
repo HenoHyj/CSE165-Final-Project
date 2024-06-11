@@ -36,21 +36,16 @@ public class BouncingBallLogic : MonoBehaviour
     private float timer = 0f;
     private bool isReleased = false;
     private bool isReadyForDestroy = false;
-    public Rigidbody Rigidbody { get; private set; }
 
     private void OnCollisionEnter() => audioSource.PlayOneShot(bounce);
 
-    private void Awake()
-    {
-        Rigidbody = GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource>();
-        audioSource.PlayOneShot(loadball);
-    }
-
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(loadball);
         centerEyeCamera = OVRManager.instance.GetComponentInChildren<OVRCameraRig>().centerEyeAnchor;
     }
+
 
     private void Update()
     {
@@ -102,10 +97,10 @@ public class BouncingBallLogic : MonoBehaviour
     public void Release(Vector3 pos, Vector3 vel, Vector3 angVel)
     {
         isReleased = true;
-        Rigidbody.position = pos; // set the origin to match target
-        Rigidbody.isKinematic = false;
-        Rigidbody.velocity = vel;
-        Rigidbody.angularVelocity = angVel;
+        transform.position = pos; // set the orign to match target
+        GetComponent<Rigidbody>().isKinematic = false;
+        GetComponent<Rigidbody>().velocity = vel;
+        GetComponent<Rigidbody>().angularVelocity = angVel;
     }
 
     private IEnumerator PlayPopCallback(float clipLength)

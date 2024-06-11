@@ -22,42 +22,31 @@ using UnityEngine;
 
 public class BouncingBallMgr : MonoBehaviour
 {
-    [SerializeField] private Transform trackingSpace;
-    [SerializeField] private Transform rightControllerPivot;
-    [SerializeField] private GameObject ballPrefab;
+    [SerializeField] private Transform trackingspace;
+    [SerializeField] private GameObject rightControllerPivot;
+    [SerializeField] private OVRInput.RawButton actionBtn;
+    [SerializeField] private GameObject ball;
 
-    private BouncingBallLogic currentBall;
-    private bool ballGrabbed;
+    private GameObject currentBall;
+    private bool ballGrabbed = false;
 
     private void Update()
     {
-        const OVRInput.RawButton grabButton = OVRInput.RawButton.RHandTrigger;
-        if (!ballGrabbed && OVRInput.GetDown(grabButton))
+        if (!ballGrabbed && OVRInput.GetDown(actionBtn))
         {
-            currentBall = Instantiate(ballPrefab).GetComponent<BouncingBallLogic>();
+            currentBall = Instantiate(ball, rightControllerPivot.transform.position, Quaternion.identity);
+            currentBall.transform.parent = rightControllerPivot.transform;
             ballGrabbed = true;
         }
 
-        if (ballGrabbed)
+        if (ballGrabbed && OVRInput.GetUp(actionBtn))
         {
-            currentBall.Rigidbody.position = rightControllerPivot.position;
-            if (OVRInput.GetUp(grabButton))
-            {
-                var localVel = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
-                var vel = trackingSpace.TransformVector(localVel);
-                var angVel = OVRInput.GetLocalControllerAngularVelocity(OVRInput.Controller.RTouch);
-                currentBall.Release(rightControllerPivot.position, vel, angVel);
-                ballGrabbed = false;
-            }
-        }
-
-        if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
-        {
-            const float speed = 10f;
-            var newBall = Instantiate(ballPrefab).GetComponent<BouncingBallLogic>();
-            const float shiftToPreventCollisionWithGrabbedBall = 0.1f;
-            var pos = rightControllerPivot.position + rightControllerPivot.forward * shiftToPreventCollisionWithGrabbedBall;
-            newBall.Release(pos, rightControllerPivot.forward * speed, Vector3.zero);
+            currentBall.transform.parent = null;
+            var ballPos = currentBall.transform.position;
+            var vel = trackingspace.rotation * OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
+            var angVel = OVRInput.GetLocalControllerAngularVelocity(OVRInput.Controller.RTouch);
+            currentBall.GetComponent<BouncingBallLogic>().Release(ballPos, vel, angVel);
+            ballGrabbed = false;
         }
     }
 }

@@ -19,18 +19,95 @@ MonoBehaviour:
     lang: en
     isPrivate: 1
     createdAt: 2024-06-03T01:20:19-0700
-    trainingStatus: 3
-    lastTrainDuration: 0
-    lastTrainedAt: 1969-12-31T16:00:00-0800
-    nextTrainAt: 2024-06-03T01:24:14-0700
+    trainingStatus: 1
+    lastTrainDuration: 72
+    lastTrainedAt: 2024-06-03T17:56:33-0700
+    nextTrainAt: 2024-06-03T17:55:21-0700
     intents:
+    - id: 1225896672115303
+      name: close_window
+      entities:
+      - name: close:close
+        id: 364411562895520
+      - name: window:window
+        id: 8493653413984090
+    - id: 820374562919409
+      name: medicine
+      entities: []
+    - id: 1078234583924820
+      name: scanning
+      entities:
+      - name: action:action
+        id: 1416238216442870
+      - name: initiate:initiate
+        id: 869748854978263
+    - id: 1542385579966999
+      name: wit$add_time_timer
+      entities: []
     - id: 446150288112707
       name: wit$confirmation
       entities: []
     - id: 849600263886053
       name: wit$negation
       entities: []
-    entities: []
+    entities:
+    - name: action
+      id: 7732925520106472
+      lookups:
+      - keywords
+      roles:
+      - name: action
+        id: 1416238216442870
+      keywords:
+      - keyword: Close
+        synonyms:
+        - close
+      - keyword: scan
+        synonyms:
+        - scan
+        - scan the body
+        - scanning
+    - name: close
+      id: 476276658108258
+      lookups:
+      - keywords
+      roles:
+      - name: close
+        id: 364411562895520
+      keywords:
+      - keyword: Close
+        synonyms:
+        - close
+        - closed
+        - turn off
+    - name: initiate
+      id: 1128947545038183
+      lookups:
+      - keywords
+      roles:
+      - name: initiate
+        id: 869748854978263
+      keywords:
+      - keyword: Start
+        synonyms:
+        - initiate
+        - initiating
+        - start
+    - name: window
+      id: 840248017969748
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: window
+        id: 8493653413984090
+      keywords:
+      - keyword: the window
+        synonyms:
+        - canvas
+        - the canvas
+        - the window
+        - window
     traits: []
     versionTags: []
     voices:
@@ -561,7 +638,7 @@ MonoBehaviour:
   - Oculus.Voice.Demo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   - Meta.WitAi.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   relaxedResolution: 0
-  _lastRefreshSeconds: 1717403245.4464777
+  _lastRefreshSeconds: 1717987507.1560423
 --- !u!114 &4030679698002070094
 MonoBehaviour:
   m_ObjectHideFlags: 0
