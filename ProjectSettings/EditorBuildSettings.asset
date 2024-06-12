@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Samples/Meta MR Utility Kit/65.0.0/Bouncing Ball/BouncingBall.unity
     guid: 8f96b0c0fd5605a4f8477abdb8e65436
+  - enabled: 0
+    path: Assets/Scenes/Project4.unity
+    guid: 91bf73dd37753ad4db33ff06c6cda9b1
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 179fd12f6e373e345b7ec237ea3bcb84, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 47098f9622e333d488982934de817e98, type: 2}

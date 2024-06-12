@@ -4,6 +4,7 @@ using UnityEngine;
 using Oculus.Voice;
 using System;
 using Oculus.Interaction.PoseDetection;
+using UnityEngine.SceneManagement;
 
 public class ScanAction : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class ScanAction : MonoBehaviour
     [SerializeField] GameObject temperatureUI;
     [SerializeField] GameObject consentUI;
     [SerializeField] AudioSource scanAudio;
+    [SerializeField] AudioSource scanAudio2;
+    [SerializeField] AudioSource consentAudio;
+
+
     [SerializeField] GameObject body;
     [SerializeField] GameObject hoodie;
     [SerializeField] GameObject shorts;
@@ -27,12 +32,14 @@ public class ScanAction : MonoBehaviour
     public void popUpCanvas(string[] values)
     {
         scanAudio.Play(0);
+        scanAudio2.Play(0);
         Invoke("ShowPopUp", 1.0f);
         ChangeObjectMaterials(body);
         ChangeObjectMaterials(eye);
         ChangeObjectMaterials(hair);
         HideClothes();
     }
+
 
     public void ChangeObjectMaterials(GameObject bodyPart)
     {
@@ -70,6 +77,11 @@ public class ScanAction : MonoBehaviour
         woundUI.SetActive(true);
     }
 
+    public void AskForConsent()
+    {
+        consentAudio.Play(0);
+    }
+
     public void closeConsentCanvas()
     {
         consentUI.SetActive(false);
@@ -79,5 +91,10 @@ public class ScanAction : MonoBehaviour
         temperatureUI.SetActive(false);
         woundUI.SetActive(false);
         consentUI.SetActive(false);
+    }
+
+    public void goToNextScene()
+    {
+        SceneManager.LoadScene("Project4", LoadSceneMode.Single);
     }
 }
